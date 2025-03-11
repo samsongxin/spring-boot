@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class EventProcessorFactoryTest {
-    // @Test
+    @Test
     public void getProcessorForLandingPageVisitEvent(){
         assertInstanceOf(LandingPageVisitProcessor.class, EventProcessorFactory.getProcessor(EventType.LANDING_PAGE_VISIT));
     }
