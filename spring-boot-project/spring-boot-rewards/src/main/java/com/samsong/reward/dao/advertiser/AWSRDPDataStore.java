@@ -21,4 +21,10 @@ public class AWSRDPDataStore implements DataStore{
         //TODO implement
         throw new UnsupportedOperationException("This method needs to be implemented");
     }
+
+	@Override
+	public Set<Campaign> removeAdvertiser(Advertiser advertiser) {
+		//TODO implement
+		throw new UnsupportedOperationException("This method needs to be implemented");
+	}
 }
