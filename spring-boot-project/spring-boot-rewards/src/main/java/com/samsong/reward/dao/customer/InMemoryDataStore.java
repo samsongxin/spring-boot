@@ -2,10 +2,7 @@ package com.samsong.reward.dao.customer;
 
 import com.samsong.reward.config.State;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * An In memory data store for testing

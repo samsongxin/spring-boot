@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LRUCustomerStateCacheTest {
     final private String CUSTOMER_ID = "customer1";
@@ -18,7 +17,7 @@ public class LRUCustomerStateCacheTest {
         target = new LRUCustomerStateCache(2);
     }
 
-    // @Test
+    @Test
     public void addCustomerStateTest(){
         target.addCustomerState(CUSTOMER_ID, State.ELIGIBLE);
         assertTrue(target.getCustomerStates(CUSTOMER_ID).contains(State.ELIGIBLE));
@@ -28,9 +27,17 @@ public class LRUCustomerStateCacheTest {
     public void testCacheCapacityOverflow(){
         target.addCustomerState("customer1", State.ELIGIBLE);
         target.addCustomerState("customer2", State.ELIGIBLE);
-        assertEquals(2, target.cacheSize());
-
         target.addCustomerState("customer3", State.ELIGIBLE);
-//        assertEquals(2, target.cacheSize()); //resume this check after LRUCustomerStateCache#removeEldestEntry method is implemented
+		assertNull(target.getCustomerStates("customer1"));
     }
+
+	@Test
+	public void testCacheCapacityOverflowCacheSize(){
+		target.addCustomerState("customer1", State.ELIGIBLE);
+		target.addCustomerState("customer2", State.ELIGIBLE);
+		assertEquals(2, target.cacheSize());
+
+		target.addCustomerState("customer3", State.ELIGIBLE);
+        assertEquals(2, target.cacheSize());
+	}
 }

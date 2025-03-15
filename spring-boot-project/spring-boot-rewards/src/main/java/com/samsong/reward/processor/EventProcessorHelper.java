@@ -1,5 +1,6 @@
 package com.samsong.reward.processor;
 
+import com.samsong.reward.Constant;
 import com.samsong.reward.WorkflowEngine;
 import com.samsong.reward.config.State;
 import com.samsong.reward.dao.customer.DataStoreFactory;
@@ -17,7 +18,11 @@ public class EventProcessorHelper {
         }
     }
 
-    private static void save(String customerId, State currentState){
+	static void save(String customerId, State currentState){
+		if(Constant.CANARY_CUSTOMER_ID.equalsIgnoreCase(customerId)){
+			// Avoid saving canary test data
+			return;
+		}
         if(DataStoreFactory.getDataStore().alreadyProcessed(customerId, currentState)){
             throw new IllegalArgumentException("Event already processed; customerId=" + customerId + "; state=" + currentState);
         }else{

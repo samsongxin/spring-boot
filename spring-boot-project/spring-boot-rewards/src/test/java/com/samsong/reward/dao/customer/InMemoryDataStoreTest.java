@@ -12,7 +12,7 @@ public class InMemoryDataStoreTest {
     final private String CUSTOMER_ID = "customer1";
 
 
-    @BeforeEach
+	@BeforeEach
     void init(){
         target = new InMemoryDataStore();
     }
@@ -37,4 +37,21 @@ public class InMemoryDataStoreTest {
         boolean alreadyProcessed = target.alreadyProcessed(CUSTOMER_ID, State.ELIGIBLE);
         assertTrue(alreadyProcessed);
     }
+
+	@Test
+	public void purgeCustomerTest(){
+		target.save(CUSTOMER_ID, State.ELIGIBILITY_EXPIRED);
+		target.purgeCustomerData(CUSTOMER_ID);
+		assertNull(target.getCustomerCurrentState(CUSTOMER_ID));
+	}
+
+	@Test
+	public void purgeMultipleCustomerTest(){
+		target.save(CUSTOMER_ID, State.ELIGIBILITY_EXPIRED);
+		String CUSTOMER_ID2 = "customer2";
+		target.save(CUSTOMER_ID2, State.CUSTOMER_NOTIFIED);
+		target.purgeCustomerData(CUSTOMER_ID);
+		target.purgeCustomerData(CUSTOMER_ID2);
+		assertNull(target.getCustomerCurrentState(CUSTOMER_ID2));
+	}
 }

@@ -7,6 +7,9 @@ import java.util.Set;
 
 public interface DataStore {
     void addCampaign(Advertiser advertiser, Campaign campaign);
+
     Set<Campaign> getCampaigns(Advertiser advertiser);
+
+	Set<Campaign> removeAdvertiser(Advertiser advertiser);
 }
 ;

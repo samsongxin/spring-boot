@@ -16,6 +16,11 @@ public class InMemoryDataStore implements DataStore{
 
     @Override
     public Set<Campaign> getCampaigns(Advertiser advertiser) {
-        return inMemoryDB.getOrDefault(advertiser, new HashSet<>());
+        return inMemoryDB.get(advertiser);
     }
+
+	@Override
+	public Set<Campaign> removeAdvertiser(Advertiser advertiser) {
+		return inMemoryDB.remove(advertiser);
+	}
 }
