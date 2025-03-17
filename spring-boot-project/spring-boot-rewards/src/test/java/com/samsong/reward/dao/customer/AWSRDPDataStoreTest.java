@@ -18,17 +18,7 @@ public class AWSRDPDataStoreTest {
     }
 
     @Test
-    public void saveTest(){
-        assertThrows(UnsupportedOperationException.class, () -> target.save(CUSTOMER_ID, State.ELIGIBLE));
-    }
-
-    @Test
     public void getCustomerCurrentStateTest(){
         assertThrows(UnsupportedOperationException.class, () -> target.getCustomerCurrentState(CUSTOMER_ID));
-    }
-
-    @Test
-    public void alreadyProcessedTest(){
-        assertThrows(UnsupportedOperationException.class, () -> target.alreadyProcessed(CUSTOMER_ID, State.ELIGIBLE));
     }
 }

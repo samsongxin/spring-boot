@@ -31,6 +31,6 @@ public class InMemoryDataStore implements DataStore{
 
     @Override
     public void purgeCustomerData(String customerId) {
-        inMemoryDB.remove(customerId);
+		inMemoryDB.getOrDefault(customerId, Collections.emptyList()).clear();
     }
 }

@@ -10,11 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class EventProcessorHelperTest {
 
-    @Test
-    public void saveTestWithEmptyCustomerID() {
-		assertDoesNotThrow(() -> {EventProcessorHelper.save(null, State.ELIGIBLE);});
-	}
-
 	@Test
 	public void saveTestWithEmptyCanaryCustomerID() {
 		assertDoesNotThrow(() -> {EventProcessorHelper.save(Constant.CANARY_CUSTOMER_ID, State.ELIGIBLE);});

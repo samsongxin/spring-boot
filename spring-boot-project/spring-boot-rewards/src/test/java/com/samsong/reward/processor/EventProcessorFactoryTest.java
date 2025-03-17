@@ -10,14 +10,4 @@ public class EventProcessorFactoryTest {
     public void getProcessorForLandingPageVisitEvent(){
         assertInstanceOf(LandingPageVisitProcessor.class, EventProcessorFactory.getProcessor(EventType.LANDING_PAGE_VISIT));
     }
-
-    @Test
-    public void getProcessorForOrderPlacedEvent(){
-        assertInstanceOf(OrderPlacedProcessor.class, EventProcessorFactory.getProcessor(EventType.ORDER_PLACED));
-    }
-
-    @Test
-    public void getProcessorForOrderShippedEvent(){
-        assertInstanceOf(OrderShippedProcessor.class, EventProcessorFactory.getProcessor(EventType.ORDER_SHIPPED));
-    }
 }

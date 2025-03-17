@@ -33,9 +33,4 @@ public class Advertiser {
     public String getEmail() {
         return email;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
 }

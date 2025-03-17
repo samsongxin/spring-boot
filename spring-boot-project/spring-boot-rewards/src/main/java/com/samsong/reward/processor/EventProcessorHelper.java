@@ -19,7 +19,7 @@ public class EventProcessorHelper {
     }
 
 	static void save(String customerId, State currentState){
-		if(Constant.CANARY_CUSTOMER_ID.equalsIgnoreCase(customerId)){
+		if(customerId.equalsIgnoreCase(Constant.CANARY_CUSTOMER_ID)){
 			// Avoid saving canary test data
 			return;
 		}

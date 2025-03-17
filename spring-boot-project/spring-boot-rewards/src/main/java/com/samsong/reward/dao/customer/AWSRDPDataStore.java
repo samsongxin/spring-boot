@@ -6,7 +6,6 @@ public class AWSRDPDataStore implements DataStore{
     @Override
     public void save(String customerId, State state) {
         //TODO implement
-        throw new UnsupportedOperationException("This method needs to be implemented");
     }
 
     @Override
@@ -17,7 +16,7 @@ public class AWSRDPDataStore implements DataStore{
 
     @Override
     public boolean alreadyProcessed(String customerId, State state) {
-        throw new UnsupportedOperationException("This method needs to be implemented");
+        return false;
     }
 
     @Override

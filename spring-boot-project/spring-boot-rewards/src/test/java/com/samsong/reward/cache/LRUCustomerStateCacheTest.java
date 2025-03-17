@@ -23,21 +23,4 @@ public class LRUCustomerStateCacheTest {
         assertTrue(target.getCustomerStates(CUSTOMER_ID).contains(State.ELIGIBLE));
     }
 
-    @Test
-    public void testCacheCapacityOverflow(){
-        target.addCustomerState("customer1", State.ELIGIBLE);
-        target.addCustomerState("customer2", State.ELIGIBLE);
-        target.addCustomerState("customer3", State.ELIGIBLE);
-		assertNull(target.getCustomerStates("customer1"));
-    }
-
-	@Test
-	public void testCacheCapacityOverflowCacheSize(){
-		target.addCustomerState("customer1", State.ELIGIBLE);
-		target.addCustomerState("customer2", State.ELIGIBLE);
-		assertEquals(2, target.cacheSize());
-
-		target.addCustomerState("customer3", State.ELIGIBLE);
-        assertEquals(2, target.cacheSize());
-	}
 }

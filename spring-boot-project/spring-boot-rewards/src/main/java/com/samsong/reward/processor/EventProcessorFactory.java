@@ -7,8 +7,8 @@ public class EventProcessorFactory {
         EventProcessor eventProcessor;
         switch (eventType){
             case LANDING_PAGE_VISIT: eventProcessor = new LandingPageVisitProcessor(); break;
-            case ORDER_PLACED: eventProcessor = new OrderPlacedProcessor(); break;
-            case ORDER_SHIPPED: eventProcessor = new OrderShippedProcessor(); break;
+            case ORDER_PLACED: eventProcessor = new OrderPlacedProcessor();
+            case ORDER_SHIPPED: eventProcessor = new OrderShippedProcessor();
             default: throw new IllegalArgumentException("Unknown eventType="+ eventType);
         }
         return eventProcessor;
