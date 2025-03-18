@@ -1,14 +1,39 @@
-# Use the OpenJDK 23 image as the base image
-#FROM maven:3.6.0-jdk-11-slim AS build
-#COPY src /home/app/src
-#COPY pom.xml /home/app
-#RUN mvn -f /home/app/pom.xml clean package \
+FROM --platform=linux/amd64 expertswe-external-base:20250227-v3
 
-#FROM openjdk:23
-#
-#WORKDIR /app
-#COPY .mvn .mvn
-#COPY mvnw mvnw.cmd pom.xml ./
-#COPY src ./src
-#RUN chmod +x mvnw.cmd
-#CMD ["mvnw", "install"]
+# install maven
+ARG MAVEN_VERSION=3.9.9
+RUN curl -fsSL "https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" | tar -xzC /usr/share/
+
+RUN mv /usr/share/apache-maven-${MAVEN_VERSION} /usr/share/maven
+
+ENV MAVEN_HOME /usr/share/maven
+ENV PATH $MAVEN_HOME/bin:$PATH
+
+RUN mvn -version
+
+
+
+# Define variables
+ARG ZIP_FILE_NAME=spring-boot-dev
+
+# Derived & constant variables
+ARG REPO_ZIP_FILE=${ZIP_FILE_NAME}.zip
+ENV REPO_DIR /root/repo
+ENV WORK_DIR ${REPO_DIR}/${ZIP_FILE_NAME}/spring-boot-project/spring-boot-rewards
+
+
+# Create working directory and copy repo archive
+RUN mkdir -p ${WORK_DIR}
+COPY ${REPO_ZIP_FILE} ${REPO_DIR}/${REPO_ZIP_FILE}
+
+# Extract the repository
+RUN unzip /root/repo/${REPO_ZIP_FILE} -d /root/repo/
+
+
+WORKDIR ${WORK_DIR}
+
+# Download dependencies (this layer is cached)
+RUN mvn dependency:go-offline
+
+RUN mvn clean test
+

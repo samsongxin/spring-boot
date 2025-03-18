@@ -20,7 +20,7 @@ public class InMemoryDataStore implements DataStore{
         if(!inMemoryDB.containsKey(customerId)){
             return null;
         }else{
-            return inMemoryDB.get(customerId).getLast();
+            return inMemoryDB.get(customerId).get(inMemoryDB.get(customerId).size() - 1);
         }
     }
 
