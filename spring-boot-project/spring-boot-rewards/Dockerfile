@@ -1,14 +1,30 @@
-# Use the OpenJDK 23 image as the base image
-#FROM maven:3.6.0-jdk-11-slim AS build
-#COPY src /home/app/src
-#COPY pom.xml /home/app
-#RUN mvn -f /home/app/pom.xml clean package \
+FROM --platform=linux/amd64 expertswe-external-base:20250227-v3
 
-#FROM openjdk:23
-#
-#WORKDIR /app
-#COPY .mvn .mvn
-#COPY mvnw mvnw.cmd pom.xml ./
-#COPY src ./src
-#RUN chmod +x mvnw.cmd
-#CMD ["mvnw", "install"]
+ARG MAVEN_VERSION=3.9.9
+
+RUN curl -fsSL "https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" | tar -xzC /usr/share/
+
+RUN mv /usr/share/apache-maven-${MAVEN_VERSION} /usr/share/maven
+
+ENV MAVEN_HOME /usr/share/maven
+ENV PATH $MAVEN_HOME/bin:$PATH
+
+RUN mvn -version
+
+
+# Define variables
+ENV WORK_DIR /root/repo
+
+# Create working directory and copy repo archive
+RUN mkdir -p ${WORK_DIR}
+COPY pom.xml ${WORK_DIR}
+COPY src ${WORK_DIR}/src
+
+# Extract the repository
+WORKDIR ${WORK_DIR}
+
+# Download dependencies (this layer is cached)
+RUN mvn dependency:go-offline
+
+RUN mvn clean test
+
