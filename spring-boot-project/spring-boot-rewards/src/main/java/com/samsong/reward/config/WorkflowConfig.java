@@ -12,8 +12,8 @@ public class WorkflowConfig {
     final public static List<State> WORKFLOW = List.of(
             State.ELIGIBLE,
             State.ORDER_PLACED,
+			State.BUDGET_RESERVED,
             State.ORDER_SHIPPED,
-            State.BUDGET_RESERVED,
             State.REWARD_GRANTED,
             State.CUSTOMER_NOTIFIED);
 }

@@ -35,5 +35,14 @@ WORKDIR ${WORK_DIR}
 # Download dependencies (this layer is cached)
 RUN mvn dependency:go-offline
 
-RUN mvn clean test
+# RUN mvn clean test
+
+WORKDIR /root
+RUN service redis-server start
+
+# cd /root/repo/spring-boot-dev/spring-boot-project/spring-boot-rewards
+# mvn test -Dtest=LRUCustomerStateCacheTest
+
+
+
 

@@ -8,13 +8,15 @@ public class OrderShippedProcessor implements EventProcessor{
         EventProcessorHelper.process(customerId,this);
     }
 
+	@Override
+	public State getStartState() {
+		return State.ORDER_SHIPPED;
+	}
+
     @Override
     public State getEndState() {
         return State.CUSTOMER_NOTIFIED;
     }
 
-    @Override
-    public State getStartState() {
-        return State.ORDER_SHIPPED;
-    }
+
 }
