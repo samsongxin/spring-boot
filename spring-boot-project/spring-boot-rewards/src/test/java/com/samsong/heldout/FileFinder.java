@@ -1,7 +1,6 @@
 package com.samsong.heldout;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,6 +13,45 @@ import java.util.stream.Stream;
  * Utility class to find files with specific extensions in a directory
  */
 public class FileFinder {
+
+	public static boolean doesFileExistInProject( String fileName) {
+		List<File> result;
+		final String directoryPath = ".";
+
+		// Use Java NIO for faster recursive search
+		try (Stream<Path> paths = Files.walk(Paths.get(directoryPath))) {
+			result = paths
+					.filter(Files::isRegularFile)
+					.filter(p -> p.toString().toLowerCase().endsWith(fileName.toLowerCase()))
+					.map(Path::toFile)
+					.collect(Collectors.toList());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		// System.out.println("all files=" + result);
+		return !result.isEmpty();
+	}
+
+	public static List<File> findProjectFilesWithExtension(final String extension){
+		try {
+			return findFilesWithExtension(".", extension);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static String readFileContent(String filePath) {
+		StringBuilder content = new StringBuilder();
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				content.append(line).append("\n");
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return content.toString();
+	}
     
     /**
      * Finds all files with the specified extension in the given directory and its subdirectories
@@ -104,8 +142,9 @@ public class FileFinder {
      */
     public static void main(String[] args) {
 
-        String directoryPath = "src/main/java";
-        String extension = "java";
+      //  String directoryPath = "src/main/java";
+		String directoryPath = ".";
+        String extension = "xml";
         
         try {
             System.out.println("Searching for *." + extension + " files in " + directoryPath);

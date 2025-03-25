@@ -55,6 +55,4 @@ public class RewardServiceTest {
 		State nextState = target.getCustomerState(CUSTOMER_ID);
 		assertEquals(State.CUSTOMER_NOTIFIED, nextState);
 	}
-
-
 }

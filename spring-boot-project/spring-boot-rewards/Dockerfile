@@ -14,12 +14,12 @@ RUN mvn -version
 
 
 # Define variables
-ARG ZIP_FILE_NAME=spring-boot-dev
+ARG ZIP_FILE_NAME=held_out_tests
 
 # Derived & constant variables
 ARG REPO_ZIP_FILE=${ZIP_FILE_NAME}.zip
 ENV REPO_DIR /root/repo
-ENV WORK_DIR ${REPO_DIR}/${ZIP_FILE_NAME}/spring-boot-project/spring-boot-rewards
+ENV WORK_DIR ${REPO_DIR}/spring-boot/spring-boot-project/spring-boot-rewards
 
 
 # Create working directory and copy repo archive
