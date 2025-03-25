@@ -36,6 +36,7 @@ RUN service redis-server start
 
 WORKDIR ${POM_DIR}
 
+# docker build -t held_out_test:1.0 --no-cache --progress=plain .
 # docker run -it held_out_test:1.0
 # mvn test -Dtest=GeneralTests#isWrittenInJava
 

@@ -32,6 +32,26 @@ public class FileFinder {
 		return !result.isEmpty();
 	}
 
+	public static File findFile( String fileName) {
+		List<File> result;
+		final String directoryPath = ".";
+
+		// Use Java NIO for faster recursive search
+		try (Stream<Path> paths = Files.walk(Paths.get(directoryPath))) {
+			result = paths
+					.filter(Files::isRegularFile)
+					.filter(p -> p.toString().toLowerCase().endsWith(fileName.toLowerCase()))
+					.map(Path::toFile)
+					.collect(Collectors.toList());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		if(result.size() != 1){
+			throw new RuntimeException("No file or more than one file found: " + result);
+		}
+		return result.get(0);
+	}
+
 	public static List<File> findProjectFilesWithExtension(final String extension){
 		try {
 			return findFilesWithExtension(".", extension);

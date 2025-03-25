@@ -332,7 +332,7 @@ public class JavaFileParser {
      */
     public static void main(String[] args) {
         // String filePath = "src/test/java/com/samsong/heldout/JavaFileParser.java";
-		String filePath = "src/main/java/com/samsong/reward/processor/EventProcessor.java";
+		String filePath = "src/main/java/com/samsong/reward/processor/LandingPageVisitProcessor.java";
         JavaFileParser parser = new JavaFileParser(filePath);
         
         if (parser.parse()) {

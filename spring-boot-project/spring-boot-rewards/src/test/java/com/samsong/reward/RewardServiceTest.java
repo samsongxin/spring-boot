@@ -47,7 +47,7 @@ public class RewardServiceTest {
 
 	@Test
 	@DisplayName("Test the next state of ORDER_SHIPPED")
-	public void nextStateOfOrderShipped() throws InterruptedException {
+	public void nextStateOfOrderShipped()  {
 		target.removeCustomer(CUSTOMER_ID);
 		target.processEvent(CUSTOMER_ID, EventType.LANDING_PAGE_VISIT);
 		target.processEvent(CUSTOMER_ID, EventType.ORDER_PLACED);
