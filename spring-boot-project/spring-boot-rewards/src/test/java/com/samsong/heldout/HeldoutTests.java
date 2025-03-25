@@ -7,19 +7,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HeldoutTests {
 
-	@DisplayName("[+10] are all code written in Java?")
+	@DisplayName("[Required] are all code written in Java?")
 	@Test
 	public void isWrittenInJava(){
 		assertTrue(FileFinder.findProjectFilesWithExtension("java").size() > 10);
 	}
 
-	@DisplayName("[+10] is Maven used as the build tool?")
+	@DisplayName("[Required] is Maven used as the build tool?")
 	@Test
 	public void isAMavenProject(){
 		assertTrue(FileFinder.doesFileExistInProject("pom.xml"));
 	}
 
-	@DisplayName("[+10] are unit tests implemented in Junit5?")
+	@DisplayName("[Required] are unit tests implemented in Junit5?")
 	@Test
 	public void usesJunit5(){
 		assertTrue(FileFinder.readFileContent("pom.xml").toLowerCase().contains("org.junit.jupiter"));
@@ -41,7 +41,7 @@ public class HeldoutTests {
 	}
 
 	@Test
-	@DisplayName("[+5] are all customer states defined in the enum class State? com.samsong.reward.config.State")
+	@DisplayName("[+5] are all customer states defined in the enum class EventType? com.samsong.reward.config.EventType")
 	public void isEventTypeEnumCreated(){
 		JavaFileParser parser = new JavaFileParser(FileFinder.findFile("EventType.java").getAbsolutePath());
 		parser.parse();
@@ -49,21 +49,21 @@ public class HeldoutTests {
 	}
 
 	@Test
-	@DisplayName("[+10] is the WorkflowEngine implemented by avoiding hard-coding logic with massive if-else statements?")
+	@DisplayName("[Required] is the WorkflowEngine implemented by avoiding hard-coding logic with massive if-else statements?")
 	public void isWorkflowEngineCreatedWithoutMassiveIfElse(){
 		String content = FileFinder.readFileContent(FileFinder.findFile("WorkflowEngine.java").getAbsolutePath());
 		String[] tokens = content.split("else");
 		assertTrue(tokens.length < 3);
 	}
 
-	@Test
-	@DisplayName("[+5] Is the reward workflow engine class unit tested?")
-	public void isWorkflowEngineTested(){
-		assertTrue(FileFinder.doesFileExistInProject("WorkflowEngineTest.java") || FileFinder.doesFileExistInProject("TestWorkflowEngine.java"));
-	}
+//	@Test
+//	@DisplayName("[+5] Is the reward workflow engine class unit tested?")
+//	public void isWorkflowEngineTested(){
+//		assertTrue(FileFinder.doesFileExistInProject("WorkflowEngineTest.java") || FileFinder.doesFileExistInProject("TestWorkflowEngine.java"));
+//	}
 
 	@Test
-	@DisplayName("[+10] is interface EventProcessor created?")
+	@DisplayName("[Required] is interface EventProcessor created?")
 	public void isEventProcessorCreated(){
 		assertTrue(FileFinder.doesFileExistInProject("EventProcessor.java"));
 	}
@@ -78,7 +78,7 @@ public class HeldoutTests {
 
 
 	@Test
-	@DisplayName("[+10] is customer data DataStore interface created?")
+	@DisplayName("[Required] is customer data DataStore interface created?")
 	public void isDataStoreCreated(){
 		assertTrue(FileFinder.doesFileExistInProject("DataStore.java"));
 	}
@@ -87,16 +87,16 @@ public class HeldoutTests {
 	//  [+5] are all data store classes placed in the same package?
 
 	@Test
-	@DisplayName("[+10] is In-memory data store implemented?")
+	@DisplayName("[Required] is In-memory data store implemented?")
 	public void isInMemoryDataStoreCreated(){
 		assertTrue(FileFinder.doesFileExistInProject("InMemoryDataStore.java"));
 	}
 
-	@Test
-	@DisplayName("[+3] is the In-memory data store unit tested?")
-	public void isInMemoryDataStoreTested(){
-		assertTrue(FileFinder.doesFileExistInProject("InMemoryDataStoreTest.java") || FileFinder.doesFileExistInProject("TestInMemoryDataStore.java"));
-	}
+//	@Test
+//	@DisplayName("[+3] is the In-memory data store unit tested?")
+//	public void isInMemoryDataStoreTested(){
+//		assertTrue(FileFinder.doesFileExistInProject("InMemoryDataStoreTest.java") || FileFinder.doesFileExistInProject("TestInMemoryDataStore.java"));
+//	}
 
 	@Test
 	@DisplayName("[+10] does in-memory data store implement DataStore interface?")

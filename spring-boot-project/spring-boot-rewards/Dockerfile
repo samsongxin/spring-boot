@@ -18,8 +18,6 @@ ENV REPO_DIR /root/repo
 ENV POM_DIR ${REPO_DIR}/spring-boot/spring-boot-project/spring-boot-rewards
 
 
-# Create working directory and copy repo archive
-# RUN mkdir -p ${POM_DIR}
 COPY ${REPO_ZIP_FILE} ${REPO_DIR}/${REPO_ZIP_FILE}
 
 # Extract the repository
@@ -38,7 +36,8 @@ WORKDIR ${POM_DIR}
 
 # docker build -t held_out_test:1.0 --no-cache --progress=plain .
 # docker run -it held_out_test:1.0
-# mvn test -Dtest=GeneralTests#isWrittenInJava
+# mvn test -Dtest=HeldoutTests#isWrittenInJava
+# mvn test -Dtest=RewardServiceTest#nextStateOfOrderPlaced
 
 
 

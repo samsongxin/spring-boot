@@ -14,6 +14,7 @@ A configurable customer reward workflow system that tracks customer reward eligi
 
 
 # Requirements:
+- Put all source code into spring-boot\spring-boot-project\spring-boot-rewards\src\
 - Implement in Java 17
 - Use Maven as the build tool
 - Implement unit tests with Junit 5
