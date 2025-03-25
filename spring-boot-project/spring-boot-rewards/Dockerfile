@@ -12,26 +12,20 @@ ENV PATH $MAVEN_HOME/bin:$PATH
 RUN mvn -version
 
 
-
-# Define variables
-ARG ZIP_FILE_NAME=held_out_tests
-
 # Derived & constant variables
-ARG REPO_ZIP_FILE=${ZIP_FILE_NAME}.zip
+ARG REPO_ZIP_FILE=held_out_tests.zip
 ENV REPO_DIR /root/repo
-ENV WORK_DIR ${REPO_DIR}/spring-boot/spring-boot-project/spring-boot-rewards
+ENV POM_DIR ${REPO_DIR}/spring-boot/spring-boot-project/spring-boot-rewards
 
 
 # Create working directory and copy repo archive
-RUN mkdir -p ${WORK_DIR}
+# RUN mkdir -p ${POM_DIR}
 COPY ${REPO_ZIP_FILE} ${REPO_DIR}/${REPO_ZIP_FILE}
 
 # Extract the repository
 RUN unzip /root/repo/${REPO_ZIP_FILE} -d /root/repo/
 
-
-WORKDIR ${WORK_DIR}
-
+WORKDIR ${POM_DIR}
 # Download dependencies (this layer is cached)
 RUN mvn dependency:go-offline
 
@@ -40,8 +34,11 @@ RUN mvn dependency:go-offline
 WORKDIR /root
 RUN service redis-server start
 
-# cd /root/repo/spring-boot-dev/spring-boot-project/spring-boot-rewards
-# mvn test -Dtest=LRUCustomerStateCacheTest
+WORKDIR ${POM_DIR}
+
+# docker run -it held_out_test:1.0
+# mvn test -Dtest=GeneralTests#isWrittenInJava
+
 
 
 
