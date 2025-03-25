@@ -19,7 +19,7 @@ public class RewardServiceTest {
 	}
 
 	@Test
-	@DisplayName("Test the state of a new customer")
+	@DisplayName("[+10] is initial customer state set to null?")
 	public void nextStateOfNewCustomer() {
 		target.removeCustomer(CUSTOMER_ID);
 		State currentState = target.getCustomerState(CUSTOMER_ID);
@@ -27,7 +27,7 @@ public class RewardServiceTest {
 	}
 
 	@Test
-	@DisplayName("Test the next state of LANDING_PAGE_VISIT")
+	@DisplayName("[+10] does customer state become ELIGIBLE after landing page visit?")
 	public void nextStateOfLPVisit() {
 		target.removeCustomer(CUSTOMER_ID);
 		target.processEvent(CUSTOMER_ID, EventType.LANDING_PAGE_VISIT);
